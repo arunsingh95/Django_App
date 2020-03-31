@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+<body>
+    <form method="POST" style="margin: 100px ;">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="exampleInputName2">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" style="width: auto;">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail2">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" style="width: auto;">
+      </div>
+      {% if message %}
+          <p>{{ message }}</p>
+      {% endif %}
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="InputPassword" name="InputPassword" style="width: auto;">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword2">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmInputPassword" name="confirmInputPassword" style="width: auto;">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputName">First Name</label>
+        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" style="width: auto;">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputName">Last Name</label>
+        <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" style="width: auto;">
+      </div>
+      <button type="submit" class="btn btn-primary" id="register_submit">Submit</button>
+    </form>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#register_submit').on('click',function(){
+            var username = $('#username').val();
+            var email = $('#email').val();
+            var password = $('#InputPassword').val();
+            var confirm_password = $('#confirmInputPassword').val();
+            var first_name = $('#first_name').val();
+            var last_name = $('#last_name').val();
+            console.log('takli',username,email,password,confirm_password);
+            $.ajax({
+                url : '/register/',
+                type : 'POST',
+                data : {
+                    username : username,
+                    email : email,
+                    password : password,
+                    confirm_password : confirm_password,
+                    first_name : first_name,
+                    last_name : last_name
+                },
+                success: function(data){
+                    console.log('arun singh');
+                }
+            });
+        });
+    });
+</script>

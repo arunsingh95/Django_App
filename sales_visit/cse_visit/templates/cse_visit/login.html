@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <form method="POST" style="margin: 100px ;">
+      {% csrf_token %}
+      {% if message %}
+          <p>{{ message }}</p>
+      {% endif %}
+      <div class="form-group">
+        <label for="exampleInputName2">Username</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Username" style="width: auto;">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="InputPassword" name="InputPassword" style="width: auto;">
+      </div>
+      <p>First time user please register here <a href="{% url 'register' %}">REGISTER</a></p>
+      <button type="submit" class="btn btn-primary" id="login_submit">Submit</button>
+    </form>
+</body>
+</html>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#login_submit').on('click',function(){
+            var username = $('#username').val();
+            var password = $('#InputPassword').val();
+            console.log('takli',username,password);
+            $.ajax({
+                url : '//',
+                type : 'POST',
+                data : {
+                    username : username,
+                    password : password,
+                },
+                success: function(data){
+                    console.log('arun singh');
+                }
+            });
+        });
+    });
+</script>
